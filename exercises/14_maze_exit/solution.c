@@ -60,7 +60,15 @@ dir_t dirs[4] = {
 };
 
 int check(int row, int col, dir_t dir) {
-#error TODO: Compute new pos, check is_valid && chessboard==0, return 1 if ok. Run "clings hint" for help.
+    int nr = row + dir.dr;
+    int nc = col + dir.dc;
+
+    if (is_valid(nr, nc) && chessboard[nr][nc] == 0)
+    {
+        return 1;
+    }
+    return 0;
+
 }
 
 int main(void) {

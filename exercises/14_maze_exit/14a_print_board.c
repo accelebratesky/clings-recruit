@@ -28,12 +28,27 @@ int my_rand(void) {
     return (_seed >> 16) & 0x7fff;
 }
 
-void init_chessboard(void) {
-#error TODO: Fill chessboard[i][j] = my_rand() % 2 with nested loops. Run "clings hint" for help.
-}
 
+
+
+void init_chessboard(void) {
+    int i, j;
+    for(i = 0; i < ROW; i++){
+        for(j = 0; j < COL; j++){
+            chessboard[i][j] = my_rand() % 2;
+        }
+    }
+}
 void print_chessboard(void) {
-#error TODO: Print board with nested loops, spaces between elements. Run "clings hint" for help.
+    int i, j;
+    for(i = 0; i < ROW; i++){
+        
+        printf("%d", chessboard[i][0]);
+        for(j = 1; j < COL; j++){
+            printf(" %d", chessboard[i][j]); //???yuanlairuci
+        }
+        printf("\n");
+    }
 }
 
 int main(void) {

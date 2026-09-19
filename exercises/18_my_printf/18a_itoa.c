@@ -17,10 +17,25 @@
 void itoa(int num, char *buf, int base) {
     char *hex = "0123456789ABCDEF";
 
-#error TODO: Fix this exercise. Run "clings hint" for help.
+    int i = 0;
+    int rest;
+    do{
+        rest = num % base;
+        buf[i++] = hex[rest];
+        num = num / base;
+    }
+    while(num != 0);
+
+    buf[i] = '\0';
+
+    for(int j = 0; j < i/2; j++){
+        char temp = buf[j];
+        buf[j] = buf[i - 1 - j];
+        buf[i - 1 - j] = temp;
+    }
 }
 
-int main(void) {
+    int main(void) {
     int num, base;
     char buf[64];
 

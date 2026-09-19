@@ -19,7 +19,21 @@
 void itoa(int num, char *buf, int base) {
     char *hex = "0123456789ABCDEF";
 
-#error TODO: Implement itoa (same as 18a). Run "clings hint" for help.
+int i = 0;
+    int rest;
+    do{
+        rest = num % base;
+        buf[i++] = hex[rest];
+        num = num / base;
+    }while(num != 0);
+
+    buf[i] = '\0';
+
+    for(int j = 0; j < i/2; j++){
+        char temp = buf[j];
+        buf[j] = buf[i - 1 - j];
+        buf[i - 1 - j] = temp;
+    }
 }
 
 void myputs(char *buf) {
@@ -27,7 +41,47 @@ void myputs(char *buf) {
 }
 
 int myprintf(const char *format, ...) {
-#error TODO: Implement myprintf with va_list (same as 18b). Run "clings hint" for help.
+va_list ap;
+    va_start(ap, format);
+    char buf[32];
+    while(*format != '\0')
+    {
+        if(*format == '%')
+        {
+            format++;
+            switch(*format)
+            {
+                case 'd':{
+                    int n = va_arg(ap, int);
+                    itoa(n, buf, 10);
+                    myputs(buf);
+                    break;
+                }
+                case 'x':{
+                    int n = va_arg(ap, int);
+                    itoa(n, buf, 16);
+                    myputs(buf);
+                    break;
+                }
+                case 'c':{
+                    int ch = va_arg(ap, int);
+                    putchar((char)ch);
+                    break;
+                }
+                case 's':{
+                    char *str = va_arg(ap, char*);
+                    myputs(str);
+                    break;
+                }
+            }
+        }
+        else
+        {
+            putchar(*format);
+        }
+        format++;
+    }
+    va_end(ap);
     return 0;
 }
 

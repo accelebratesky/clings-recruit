@@ -18,8 +18,7 @@
 
 int count_bits(int num) {
     int sum = 0;
-
-#error TODO: while (num != 0) { num &= (num - 1); sum++; }
+    while (num != 0) { num = num & (num - 1); sum++; }
     return sum;
 }
 

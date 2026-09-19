@@ -45,7 +45,46 @@ void myputs(char *buf) {
 }
 
 int myprintf(const char *format, ...) {
-#error TODO: Fix this exercise. Run "clings hint" for help.
+    va_list ap;
+    va_start(ap, format);
+
+    char c;
+    char buf[64];
+
+    while ((c = *format++) != '\0')
+    {
+        if (c != '%')
+        {
+            putchar(c);
+        }
+        else
+        {
+            char fmt = *format++;
+            if(fmt == 'd')
+            {
+                int val = va_arg(ap, int);
+                itoa(val, buf, 10);
+                myputs(buf);
+            }
+            else if(fmt == 'x')
+            {
+                int val = va_arg(ap, int);
+                itoa(val, buf, 16);
+                myputs(buf);
+            }
+            else if(fmt == 'c')
+            {
+                int ch = va_arg(ap, int);
+                putchar(ch);
+            }
+            else if(fmt == 's')
+            {
+                char *str = va_arg(ap, char *);
+                myputs(str);
+            }
+        }
+    }
+    va_end(ap);
     return 0;
 }
 

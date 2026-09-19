@@ -18,7 +18,15 @@
 #include <stdio.h>
 
 char *mystrcpy_delt(char *dst, const char *src) {
-#error TODO: s = (char*)src; delt = dst - src; while (*s) { s[delt] = *s; s++; } s[delt] = '\0';
+char *s = (char *)src;
+    int delt = dst - src;
+
+    while (*s != '\0')
+    {
+        s[delt] = *s;
+        s++;
+    }
+    s[delt] = '\0';
     return dst;
 }
 

@@ -10,7 +10,7 @@
  *       3. state==1 && input==0: state=0, words++, 打印 "word %d found!\n"
  *          然后 for 循环打印 p[0..counter-1] 每个字符，再打印 "\n"
  *       4. state==1 && input==1: state=1, counter++
- *       5. 遇到 '\0' 跳出循环
+;l *       5. 遇到 '\0' 跳出循环
  *       6. 最后打印 "there is %d words found!\n"
  *
  * 验证："This is a book" → "word 1 found!\nThis\n...there is 4 words found!\n"
@@ -43,8 +43,37 @@ int main(void) {
         }
 
     i = 0;
-
-#error TODO: Implement state machine loop with 4 branches for word counting. Run "clings hint" for help.
+while(buf[i] != '\0'){
+    int input = get_input_type(buf[i]);
+    if(state == 0 && input == 0){
+        state = 0;
+    }else if(state == 0 && input == 1){
+        state = 1;
+        p = &buf[i];
+        counter = 0;
+        counter++;
+    }else if(state == 1 && input == 0){
+        state = 0;
+        words ++;
+        printf("word %d found!\n", words);
+        for(int k = 0; k < counter; k++){
+            printf("%c", p[k]);
+        }
+        printf("\n");
+    }else if(state == 1 && input == 1){
+        state = 1;
+        counter ++;
+    }
+    i++;
+}
+if(state == 1){
+    words++;
+    printf("word %d found!\n", words);
+    for(int k = 0; k < counter; k++){
+        printf("%c", p[k]);
+    }
+    printf("\n");
+}
 
     printf("there is %d words found!\n", words);
     return 0;
